@@ -11,4 +11,4 @@ def grava_resultado(texto,nome_arquivo,pasta_destino):
         else:
             if isinstance(texto,list):
                 for linha in texto:
-                    saida.write(linha+"\n")
+                    saida.write(str(linha)+"\n")

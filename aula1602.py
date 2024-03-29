@@ -23,7 +23,6 @@ def aula1602():
         arquivo_destino = arquivo_origem[3][3:]+"-"+arquivo_origem[-1][-4:]
         grava_resultado(cabecalho,arquivo_destino,"aula1602")
 
-
     for file in ats:
         with open(file, encoding="utf-8") as f:
             html= f.read() 
@@ -37,10 +36,15 @@ def aula1602_b():
         with open (fonte_cabecalho+"/"+arquivo, encoding="utf-8") as cabecalho_in:
             texto=cabecalho_in.read()
             texto_completo=texto.splitlines()
-            texto_completo.append("---")
             with open (fonte_artigo+"/"+arquivo, encoding="utf-8") as artigo_in:
                 texto=artigo_in.read()
                 artigo=texto.splitlines()
+                for linha in artigo:
+                    if "|" in linha:
+                        autor=linha.split(" | ")
+                        texto_completo.append("data: "+autor[0][:])
+                        texto_completo.append("autor: "+autor[-1][:])
+                texto_completo.append("---")
                 for linha in artigo:
                     if linha != "" and "voltar à página anterior" not in linha and len(linha)>3:
                         texto_completo.append(linha)
