@@ -11,17 +11,17 @@ def web_scrapping(site, inicio, fim):
         except Exception as e:
             pass
 
-def converte_md(pastaorigem, pastadestino):
+def converte_md(pasta_origem, pasta_destino):
 
-    if not os.path.exists(pastadestino):
-        os.makedirs(pastadestino)
+    if not os.path.exists(pasta_destino):
+        os.makedirs(pasta_destino)
 
-    arquivos = os.listdir(pastaorigem)
+    arquivos = os.listdir(pasta_origem)
 
     for arquivo in arquivos:
         print(arquivo)
-        origem = os.path.join(pastaorigem, arquivo)
-        nomefim = arquivo + ".md"
-        caminho_saida = os.path.join(pastadestino, nomefim)
+        origem = os.path.join(pasta_origem, arquivo)
+        nome_fim = arquivo + ".md"
+        caminho_saida = os.path.join(pasta_origem, nome_fim)
         comando = f"pandoc -f html {origem} -o {caminho_saida}"
         subprocess.run(comando, shell=True)
