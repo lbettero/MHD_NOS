@@ -44,8 +44,7 @@ def aula1602():
 #Obs. Adicionalmente foram encontrados os nomes dos autores das entrevistas/entrevistadores,
 #que também foram colocados no cabeçalho
 
-def aula1602_b(fonte_cabecalho,pasta_destino):
-    fonte_artigo="aula1502"
+def aula1602_b(fonte_cabecalho,pasta_destino,fonte_artigo):
     arquivos=os.listdir(fonte_cabecalho)
     for arquivo in arquivos:
         with open (fonte_cabecalho+"/"+arquivo, encoding="utf-8") as cabecalho_in:
