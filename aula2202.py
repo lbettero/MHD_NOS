@@ -4,8 +4,9 @@ from grava_resultados import *
 import requests
 from le_arquivos import*
 import os
+from aula1602 import aula1602_b
 
-def aula1602():
+def aula2202():
     
     ats= glob("www.nos.uminho.pt/Article.aspx*")
 
@@ -30,41 +31,22 @@ def aula1602():
             cabecalho+= f"autor: {obter_autor}\n"#adiciona o nome do autor ao cabeçalho
         except Exception as e:
             pass
+        
+        art= a.find("div", id="artigo") #procura
+        obter_slides = art.find("div", {'id':'slides'}) # ir ao div de id slides pois contém todas as imagens que queremos
+        if obter_slides is not None: # caso exista div de id slides procurar pelas imagens
+            for slide in obter_slides.find_all("div", {'class':'slide'}): # percorrer todos os div class slide pois contém todas as imagens que queremos
+                imagem = slide.find('img') # obter a imagem
+                cabecalho += f"{imagem['src']}\n" # adicionar imagem ao cabeçalho
+
         cabecalho+=f"---\n"
         arquivo_origem = file.split(".")
         arquivo_destino = arquivo_origem[3][3:]+"-"+arquivo_origem[-1][-4:]
-        grava_resultado(cabecalho,arquivo_destino,"aula1602")
+        grava_resultado(cabecalho,arquivo_destino,"aula2202")
 
     for file in ats:
         with open(file, encoding="utf-8") as f:
-            html= f.read() 
+            html= f.read()
         busca_meta_dados(html)
 
-#ECERCÍCIO 1: PROCURAR AS DATAS, COLOCANDO-AS NO CABEÇALHO
-#Obs. Adicionalmente foram encontrados os nomes dos autores das entrevistas/entrevistadores,
-#que também foram colocados no cabeçalho
-
-def aula1602_b(fonte_cabecalho,pasta_destino):
-    fonte_artigo="aula1502"
-    arquivos=os.listdir(fonte_cabecalho)
-    for arquivo in arquivos:
-        with open (fonte_cabecalho+"/"+arquivo, encoding="utf-8") as cabecalho_in:
-            texto=cabecalho_in.read()
-            texto_completo=texto.splitlines()
-            try:
-                with open (fonte_artigo+"/"+arquivo, encoding="utf-8") as artigo_in:
-                    texto=artigo_in.read()
-                    artigo=texto.splitlines()
-                    #BLOCO DESATIVADO AO ADICIONAR A VERSÃO FEITA NA AULA DE 22 DE FEVEREIRO
-                    #for linha in artigo:
-                    #    if "|" in linha:
-                    #        autor=linha.split(" | ")
-                    #        texto_completo.append("data: "+autor[0][:])
-                    #        texto_completo.append("autor: "+autor[-1][:])
-                    #texto_completo.append("---")
-                    for linha in artigo:
-                        if linha != "" and "voltar à página anterior" not in linha and (len(linha)-linha.count(" "))>3:
-                            texto_completo.append(linha)
-            except Exception as e:
-                pass
-        grava_resultado(texto_completo,arquivo,pasta_destino)
+    aula1602_b("aula2202","aula2202_b")
