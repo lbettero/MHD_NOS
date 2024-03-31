@@ -63,7 +63,15 @@ def aula1602_b(fonte_cabecalho,pasta_destino,fonte_artigo):
                     #texto_completo.append("---")
                     for linha in artigo:
                         if linha != "" and "voltar à página anterior" not in linha and (len(linha)-linha.count(" "))>3:
-                            texto_completo.append(linha)
+                            if linha == artigo[6]:
+                                linha="*"+linha+"*"
+                            linha=re.sub(r'\s{2,}', ' ', linha)
+                            linha=re.sub(r'\t+', '', linha)
+                            linha=re.sub('"','',linha)
+                            if linha.startswith('\s') or linha.startswith('\t'):
+                                texto_completo.append(linha[1:])
+                            else:
+                                texto_completo.append(linha)
             except Exception as e:
                 pass
         grava_resultado(texto_completo,arquivo,pasta_destino)

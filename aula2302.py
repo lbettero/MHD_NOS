@@ -1,6 +1,7 @@
 from jjcli import *
 from bs4 import BeautifulSoup as bs
 from grava_resultados import *
+import os
 
 def aula2302():
     ats= glob("www.nos.uminho.pt/Article.aspx*")
@@ -32,3 +33,22 @@ def aula2302():
         with open(file, encoding="utf-8") as f:
             html= f.read() 
         proc_article (html)
+
+def aula2302_b():
+    arquivos=os.listdir("aula2302_b")
+    for arquivo in arquivos:
+        with open ("aula2302_b/"+arquivo,"r", encoding="utf-8") as f:
+            texto=f.read()
+        linhas_texto=texto.splitlines()
+        fim_cabeçalho=linhas_texto.index("---")
+        inicio_materia=fim_cabeçalho+4
+        caracteres_totais=sum(len(caracter) for caracter in linhas_texto[inicio_materia:])
+        palavras_totais=0
+        for linha in linhas_texto[inicio_materia:]:
+            linha_quebrada=linha.split(" ")
+            palavras_totais+=len(linha_quebrada)
+        linhas_texto.insert(fim_cabeçalho,"Caracteres Totais: "+str(caracteres_totais))
+        linhas_texto.insert(fim_cabeçalho,"Palavras Totais: "+str(palavras_totais))
+
+        grava_resultado(linhas_texto,arquivo,"aula2302_c")
+
