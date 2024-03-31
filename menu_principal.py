@@ -44,6 +44,10 @@ def caso_aula_23_02():
     print("Textos extraídos dos htmls com alterações nas tags.\n\n")
     menu()
 
+def caso_aula_23_02_b():
+    aula2302_b()
+    menu()
+
 def sair():
     print("Até a próxima!")
 
@@ -55,6 +59,7 @@ switch={
     5: caso_aula_16_02_b,
     6: caso_aula_22_02,
     7: caso_aula_23_02,
+    8: caso_aula_23_02_b,
     0: sair,
 }
 
@@ -67,6 +72,7 @@ def menu():
                       5: Aula_16_02b - Juntar os arquivos de cabeçalho e artigo\n
                       6: Aula_22_02 - Extrair os nomes das imagens dos htmls e adicionar ao cabeçalho\n
                       7: Aula_23_02 - Extrair o texto dos artigos dos htmls com alterações nas Tags\n
+                      8: Aula_23_02b - Testes adicionais\n
                       0: Sair\n\n
                       Digite o número da opção desejada: """))
 
